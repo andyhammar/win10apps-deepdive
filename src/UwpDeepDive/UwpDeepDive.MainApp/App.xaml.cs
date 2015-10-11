@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -24,7 +25,7 @@ namespace UwpDeepDive.MainApp
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
-
+        
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -32,7 +33,8 @@ namespace UwpDeepDive.MainApp
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
+            CheckActivationKind(e.Kind);
+            CheckPreviousExecutionState(e.PreviousExecutionState);
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -69,14 +71,117 @@ namespace UwpDeepDive.MainApp
             }
             // Ensure the current window is active
             Window.Current.Activate();
+
+            var systemNavigationManager = SystemNavigationManager.GetForCurrentView();
+            systemNavigationManager.BackRequested += App_BackRequested;
         }
+
+        private void CheckActivationKind(ActivationKind kind)
+        {
+            switch (kind)
+            {
+                case ActivationKind.Launch:
+                    break;
+                case ActivationKind.Search:
+                    break;
+                case ActivationKind.ShareTarget:
+                    break;
+                case ActivationKind.File:
+                    break;
+                case ActivationKind.Protocol:
+                    break;
+                case ActivationKind.FileOpenPicker:
+                    break;
+                case ActivationKind.FileSavePicker:
+                    break;
+                case ActivationKind.CachedFileUpdater:
+                    break;
+                case ActivationKind.ContactPicker:
+                    break;
+                case ActivationKind.Device:
+                    break;
+                case ActivationKind.PrintTaskSettings:
+                    break;
+                case ActivationKind.CameraSettings:
+                    break;
+                case ActivationKind.RestrictedLaunch:
+                    break;
+                case ActivationKind.AppointmentsProvider:
+                    break;
+                case ActivationKind.Contact:
+                    break;
+                case ActivationKind.LockScreenCall:
+                    break;
+                case ActivationKind.VoiceCommand:
+                    break;
+                case ActivationKind.LockScreen:
+                    break;
+                case ActivationKind.PickerReturned:
+                    break;
+                case ActivationKind.WalletAction:
+                    break;
+                case ActivationKind.PickFileContinuation:
+                    break;
+                case ActivationKind.PickSaveFileContinuation:
+                    break;
+                case ActivationKind.PickFolderContinuation:
+                    break;
+                case ActivationKind.WebAuthenticationBrokerContinuation:
+                    break;
+                case ActivationKind.WebAccountProvider:
+                    break;
+                case ActivationKind.ComponentUI:
+                    break;
+                case ActivationKind.ProtocolForResults:
+                    break;
+                case ActivationKind.ToastNotification:
+                    break;
+                case ActivationKind.DialReceiver:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(kind), kind, null);
+            }
+        }
+
+        private void CheckPreviousExecutionState(ApplicationExecutionState previousExecutionState)
+        {
+            switch (previousExecutionState)
+            {
+                case ApplicationExecutionState.NotRunning:
+                    break;
+                case ApplicationExecutionState.Running:
+                    break;
+                case ApplicationExecutionState.Suspended:
+                    break;
+                case ApplicationExecutionState.Terminated:
+                    //try to recover state, if it makes sense (time since last run?)
+                    break;
+                case ApplicationExecutionState.ClosedByUser:
+                    //probably revert to clean state
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(previousExecutionState), previousExecutionState, null);
+            }
+        }
+
+        private void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            var frame = Window.Current.Content as Frame;
+            if (frame == null) return;
+            if (frame.CanGoBack)
+            {
+                frame.GoBack();
+                e.Handled = true;
+            }
+        }
+
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }

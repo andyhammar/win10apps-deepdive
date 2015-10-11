@@ -5,9 +5,13 @@
     xmlns:local="using:UwpDeepDive.MainApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mainApp="using:UwpDeepDive.MainApp"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock Text="Adaptive code:"/>
+        <TextBlock x:Name="_adaptiveCodeStatusTextBlock"/>
+        <TextBlock Text="Device family awareness:"/>
+        <mainApp:DeviceSpecificUc/>
+    </StackPanel>
 </local:PageBase>

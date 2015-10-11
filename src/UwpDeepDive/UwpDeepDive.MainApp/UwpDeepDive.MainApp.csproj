@@ -108,6 +108,9 @@
     <Compile Include="Views\AdaptivePage.xaml.cs">
       <DependentUpon>AdaptivePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeviceSpecificUc.xaml.cs">
+      <DependentUpon>DeviceSpecificUc.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LifecyclePage.xaml.cs">
       <DependentUpon>LifecyclePage.xaml</DependentUpon>
     </Compile>
@@ -137,11 +140,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="DeviceFamily-Mobile\DeviceSpecificUc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AdaptivePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeviceSpecificUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -153,6 +164,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.10240.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
