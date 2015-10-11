@@ -5,9 +5,19 @@
     xmlns:local="using:UwpDeepDive.MainApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:viewModels="using:UwpDeepDive.MainApp.ViewModels"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance viewModels:MainPageVm, d:IsDesignTimeCreatable=true}">
+    <Page.Resources>
+        <DataTemplate x:Key="PageItemTemplate">
+            <Grid>
+                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Name}" Tag="{Binding}"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <ListView ItemsSource="{Binding Pages}" ItemTemplate="{StaticResource PageItemTemplate}" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" SelectionMode="None"
+                  />
     </Grid>
 </Page>
