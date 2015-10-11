@@ -12,14 +12,6 @@
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ViewStates">
                 <VisualState x:Name="NarrowState"/>
-                <VisualState x:Name="WideState">
-                    <VisualState.Setters>
-                        <Setter Target="stackPanel.(RelativePanel.AlignRightWithPanel)" Value="False"/>
-                    </VisualState.Setters>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="500"/>
-                    </VisualState.StateTriggers>
-                </VisualState>
                 <VisualState x:Name="UltraWideState">
                     <VisualState.Setters>
                         <Setter Target="stackPanel.(RelativePanel.AlignRightWithPanel)" Value="False"/>
@@ -31,6 +23,19 @@
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="WideState">
+                    <VisualState.Setters>
+                        <Setter Target="stackPanel.(RelativePanel.AlignRightWithPanel)" Value="False"/>
+                        <Setter Target="image.(FrameworkElement.Margin)">
+                            <Setter.Value>
+                                <Thickness>10,0,0,0</Thickness>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500"/>
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
