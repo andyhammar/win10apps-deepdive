@@ -1,5 +1,6 @@
 ﻿// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
+using Windows.Foundation;
 using Windows.Foundation.Metadata;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml.Navigation;
@@ -15,6 +16,7 @@ namespace UwpDeepDive.MainApp.Views
         public AdaptivePage()
         {
             this.InitializeComponent();
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(400, 400));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
