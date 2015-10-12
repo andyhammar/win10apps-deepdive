@@ -43,9 +43,9 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Binding" FontSize="36"/>
+        <TextBlock Text="Binding" Style="{StaticResource AppHeaderTextBlockStyle}"/>
         <ListView Grid.Row="1" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_Binding}" />
-        <TextBlock Grid.Row="2" Text="x:Bind" FontSize="36"/>
+        <TextBlock Grid.Row="2" Text="x:Bind" Style="{StaticResource AppHeaderTextBlockStyle}"/>
         <ListView Grid.Row="3" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_XBind}" />
     </Grid>
 </local:PageBase>
