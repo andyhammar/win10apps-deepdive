@@ -8,7 +8,7 @@
     x:Class="UwpDeepDive.MainApp.Views.XamlPage"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance ViewModels:XamlPageVm}">
     <local:PageBase.Resources>
-        <DataTemplate x:Key="DataTemplate1">
+        <DataTemplate x:Key="DataTemplate_Binding">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -19,29 +19,33 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="{Binding Title}" Grid.Column="1"/>
-                <TextBlock Text="{Binding Description}" Grid.Row="1" Grid.Column="1"/>
-                <Image Grid.RowSpan="2" Source="{Binding ImageUri}"/>
+                <TextBlock Text="{Binding Date}" Grid.Row="1" Grid.Column="1"/>
+                <Image Grid.RowSpan="2" Source="{Binding ImageUri}" Height="60" Width="60" Margin="0,0,10,0"/>
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="DataTemplate2" x:DataType="ViewModels:NewsItemVmi">
+        <DataTemplate x:Key="DataTemplate_XBind" x:DataType="ViewModels:NewsItemVmi">
             <RelativePanel>
+                <Image x:Name="image" Source="{x:Bind ImageUri}"
+                       x:Phase="2" Height="60" Width="60" Margin="0,0,8,0"/>
                 <TextBlock x:Name="title" Text="{x:Bind Title}" 
                            RelativePanel.RightOf="image" />
-                <TextBlock x:Name="description" Text="{x:Bind Description}" 
+                <TextBlock x:Name="date" Text="{x:Bind Date}" 
                            RelativePanel.RightOf="image" RelativePanel.Below="title"
                            x:Phase="1"/>
-                <Image x:Name="image" Source="{x:Bind ImageUri}"
-                       x:Phase="2"/>
             </RelativePanel>
         </DataTemplate>
     </local:PageBase.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListView ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate1}" />
-        <ListView Grid.Row="1" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate2}" />
+        <TextBlock Text="Binding" FontSize="36"/>
+        <ListView Grid.Row="1" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_Binding}" />
+        <TextBlock Grid.Row="2" Text="x:Bind" FontSize="36"/>
+        <ListView Grid.Row="3" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_XBind}" />
     </Grid>
 </local:PageBase>
