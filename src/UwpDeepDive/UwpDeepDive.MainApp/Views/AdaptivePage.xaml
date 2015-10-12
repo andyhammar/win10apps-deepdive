@@ -43,7 +43,7 @@
         <StackPanel x:Name="stackPanel" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
             <TextBlock Text="Adaptive code" Style="{StaticResource AppHeaderTextBlockStyle}"/>
             <TextBlock x:Name="_adaptiveCodeStatusTextBlock"/>
-            <TextBlock Text="Device family" Style="{StaticResource AppHeaderTextBlockStyle}" SelectionChanged="TextBlock_SelectionChanged"/>
+            <TextBlock Text="Device family" Style="{StaticResource AppHeaderTextBlockStyle}"/>
             <mainApp:DeviceSpecificUc/>
         </StackPanel>
         <Image x:Name="image" RelativePanel.RightOf="stackPanel" Source="http://d.ibtimes.co.uk/en/full/1451623/windows-10.jpg"/>

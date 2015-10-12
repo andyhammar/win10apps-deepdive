@@ -1,4 +1,6 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using UwpDeepDive.MainApp.ViewModels;
 
@@ -24,6 +26,15 @@ namespace UwpDeepDive.MainApp.Views
             base.OnNavigatedTo(e);
 
             await _vm.Init();
+        }
+
+        private void button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            _lazyImage.Source =
+                new BitmapImage(
+                    new Uri(
+                        "http://www.extremetech.com/wp-content/uploads/2014/10/windows-10-logo-windows-91-640x353.jpg",
+                        UriKind.Absolute));
         }
     }
 }

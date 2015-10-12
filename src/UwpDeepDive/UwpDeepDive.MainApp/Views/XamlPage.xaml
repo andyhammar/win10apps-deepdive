@@ -37,6 +37,33 @@
     </local:PageBase.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStates">
+                <VisualState x:Name="Narrow"/>
+                <VisualState x:Name="MediumWide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="button.(UIElement.Visibility)" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="FullWide">
+                    <VisualState.Setters>
+                        <Setter Target="button.(UIElement.Visibility)" Value="Visible"/>
+                        <Setter Target="_lazyImage.(UIElement.Visibility)" Value="Visible"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -44,8 +71,13 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Text="Binding" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-        <ListView Grid.Row="1" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_Binding}" />
+        <ListView x:Name="listView" Grid.Row="1" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_Binding}" />
         <TextBlock Grid.Row="2" Text="x:Bind" Style="{StaticResource AppHeaderTextBlockStyle}"/>
         <ListView Grid.Row="3" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_XBind}" />
+        <Button x:Name="button" Grid.RowSpan="4" Content="override image" VerticalAlignment="Center" Grid.Column="1" Visibility="Collapsed"
+                Click="button_Click"/>
+        <Image x:Name="_lazyImage" Width="200" Grid.Column="2" Visibility="Collapsed"
+               Grid.RowSpan="4" VerticalAlignment="Center"
+               x:DeferLoadStrategy="Lazy" Source="{Binding SelectedItem.ImageUri, ElementName=listView}"/>
     </Grid>
 </local:PageBase>
