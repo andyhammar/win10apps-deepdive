@@ -12,7 +12,8 @@ namespace UwpDeepDive.MainApp.ViewModels
             {
                 new PageVmi("Adaptive", typeof(AdaptivePage)),
                 new PageVmi("XAML", typeof(XamlPage)),
-                new PageVmi("Navigation", typeof(LifecyclePage))
+                new PageVmi("Navigation (string)", typeof(LifecyclePage), "initial text (via string)"),
+                new PageVmi("Navigation (object)", typeof(LifecyclePage), new LifecyclePageVm {UserText = "initial text (via object)"})
             };
         }
         public ObservableCollection<PageVmi> Pages { get; set; }

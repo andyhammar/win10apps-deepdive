@@ -10,8 +10,8 @@
     d:DataContext="{d:DesignInstance viewModels:MainPageVm, d:IsDesignTimeCreatable=true}">
     <Page.Resources>
         <DataTemplate x:Key="PageItemTemplate">
-            <Grid>
-                <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="{Binding Name}" Tag="{Binding}"/>
+            <Grid> 
+                <TextBlock x:Name="textBlock" Text="{Binding Name}" Tag="{Binding}" Style="{StaticResource AppHeaderTextBlockStyle}"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>

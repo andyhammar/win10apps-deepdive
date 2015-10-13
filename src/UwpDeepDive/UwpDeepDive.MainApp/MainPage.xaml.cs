@@ -21,7 +21,7 @@ namespace UwpDeepDive.MainApp
             var page = e.ClickedItem as PageVmi;
             if (page == null) return;
 
-            Frame.Navigate(page.Type);
+            Frame.Navigate(page.Type, page.Param);
         }
     }
 }

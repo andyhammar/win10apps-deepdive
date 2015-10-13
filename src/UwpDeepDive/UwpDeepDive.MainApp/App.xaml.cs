@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -13,6 +14,8 @@ namespace UwpDeepDive.MainApp
     /// </summary>
     sealed partial class App : Application
     {
+        private Frame _rootFrame;
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -42,32 +45,33 @@ namespace UwpDeepDive.MainApp
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            _rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            if (rootFrame == null)
+            if (_rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+                _rootFrame = new Frame();
 
-                rootFrame.NavigationFailed += OnNavigationFailed;
+                _rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
+                    RecoverNavigationState(_rootFrame);
                 }
 
                 // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                Window.Current.Content = _rootFrame;
             }
 
-            if (rootFrame.Content == null)
+            if (_rootFrame.Content == null)
             {
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                _rootFrame.Navigate(typeof(MainPage), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();
@@ -197,7 +201,22 @@ namespace UwpDeepDive.MainApp
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            SaveNavigationState();
             deferral.Complete();
+        }
+
+        private void SaveNavigationState()
+        {
+            var naviState = _rootFrame.GetNavigationState();
+            ApplicationData.Current.LocalSettings.Values["naviState"] = naviState;
+        }
+
+        private void RecoverNavigationState(Frame rootFrame)
+        {
+            var naviState = ApplicationData.Current.LocalSettings.Values["naviState"] as string;
+            if (naviState == null) return;
+
+            rootFrame.SetNavigationState(naviState);
         }
     }
 }
