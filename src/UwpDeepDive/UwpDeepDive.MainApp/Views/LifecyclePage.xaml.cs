@@ -1,6 +1,8 @@
 ﻿// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using UwpDeepDive.MainApp.Helpers;
 using UwpDeepDive.MainApp.ViewModels;
 
 namespace UwpDeepDive.MainApp.Views
@@ -14,16 +16,23 @@ namespace UwpDeepDive.MainApp.Views
 
         public LifecyclePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             DataContext = _vm = new LifecyclePageVm();
+            AppLog.Write();
+
+            NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            AppLog.Write();
             base.OnNavigatedTo(e);
 
-            HandleObjectParameter(e);
-            HandleStringParameter(e);
+            if (e.NavigationMode != NavigationMode.Back)
+            {
+                HandleObjectParameter(e);
+                HandleStringParameter(e);
+            }
         }
 
         private void HandleObjectParameter(NavigationEventArgs navigationEventArgs)
@@ -39,6 +48,11 @@ namespace UwpDeepDive.MainApp.Views
             if (text == null) return;
 
             _vm.UserText = text;
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (LifecyclePageChild));
         }
     }
 }

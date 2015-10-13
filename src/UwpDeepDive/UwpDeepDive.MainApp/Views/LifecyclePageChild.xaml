@@ -4,9 +4,8 @@
     xmlns:local="using:UwpDeepDive.MainApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ViewModels="using:UwpDeepDive.MainApp.ViewModels"
-    x:Class="UwpDeepDive.MainApp.Views.LifecyclePage"
-    mc:Ignorable="d" d:DataContext="{d:DesignInstance ViewModels:LifecyclePageVm, IsDesignTimeCreatable=True}">
+    x:Class="UwpDeepDive.MainApp.Views.LifecyclePageChild"
+    mc:Ignorable="d">
     <local:PageBase.Resources>
         <Style x:Key="TextBoxStyle1" TargetType="TextBox">
             <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
@@ -161,18 +160,11 @@
     </local:PageBase.Resources>
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="header" Text="Lifecycle" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-        <TextBox Header="text input" 
-			RelativePanel.Below="header"
-			RelativePanel.AlignBottomWithPanel="True"
-			RelativePanel.AlignRightWithPanel="true"
-			RelativePanel.AlignLeftWithPanel="true"
-			Text="{Binding UserText, Mode=TwoWay}"
-			Margin="8" HorizontalContentAlignment="Stretch" Style="{StaticResource TextBoxStyle1}" TextWrapping="Wrap"/>
-        <Button Content="Next"
-                RelativePanel.AlignRightWithPanel="True"
-                Margin="20"
-                Click="ButtonBase_OnClick"
-                />
+        <TextBlock x:Name="header" Text="LifecycleChild" Style="{StaticResource AppHeaderTextBlockStyle}"
+                   RelativePanel.AlignTopWithPanel="True"/>
+        <TextBlock Text="HELLO" Style="{StaticResource AppHeaderTextBlockStyle}"
+                   RelativePanel.AlignHorizontalCenterWithPanel="True"
+                   RelativePanel.AlignVerticalCenterWithPanel="True"/>
+
     </RelativePanel>
 </local:PageBase>

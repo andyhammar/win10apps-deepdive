@@ -99,6 +99,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AppLog.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -115,6 +116,9 @@
     </Compile>
     <Compile Include="DeviceSpecificUc.xaml.cs">
       <DependentUpon>DeviceSpecificUc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LifecyclePageChild.xaml.cs">
+      <DependentUpon>LifecyclePageChild.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LifecyclePage.xaml.cs">
       <DependentUpon>LifecyclePage.xaml</DependentUpon>
@@ -160,6 +164,10 @@
     <Page Include="DeviceSpecificUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LifecyclePageChild.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\LifecyclePage.xaml">
       <SubType>Designer</SubType>

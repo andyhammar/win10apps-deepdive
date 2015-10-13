@@ -6,6 +6,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using UwpDeepDive.MainApp.Helpers;
 
 namespace UwpDeepDive.MainApp
 {
@@ -36,6 +37,8 @@ namespace UwpDeepDive.MainApp
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            AppLog.Write();
+
             CheckActivationKind(e.Kind);
             CheckPreviousExecutionState(e.PreviousExecutionState);
 #if DEBUG
@@ -199,6 +202,8 @@ namespace UwpDeepDive.MainApp
         /// <param name="e">Details about the suspend request.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
+            AppLog.Write();
+
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             SaveNavigationState();
