@@ -14,6 +14,7 @@ namespace UwpDeepDive.MainApp.ViewModels
                 new PageVmi("XAML", typeof(XamlPage)),
                 new PageVmi("Navigation & Lifecycle", typeof(LifecyclePage)),
                 new PageVmi("Background", typeof(BackgroundPage)),
+                new PageVmi("App-to-app", typeof(AppToAppPage)),
             };
         }
         public ObservableCollection<PageVmi> Pages { get; set; }
