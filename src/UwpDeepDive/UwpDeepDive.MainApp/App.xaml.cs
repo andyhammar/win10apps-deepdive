@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
@@ -18,6 +19,7 @@ namespace UwpDeepDive.MainApp
     sealed partial class App : Application
     {
         private Frame _rootFrame;
+        private static ApplicationTrigger _bgTaskTrigger;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -100,6 +102,7 @@ namespace UwpDeepDive.MainApp
         {
             RegisterTask("timerTask", new TimeTrigger(60, false));
             RegisterTask("toastNotificationActionTask", new ToastNotificationActionTrigger());
+            RegisterTask("appTriggerTask", _bgTaskTrigger = new ApplicationTrigger());
         }
 
         private void RegisterTask(string name, IBackgroundTrigger trigger)
@@ -122,6 +125,11 @@ namespace UwpDeepDive.MainApp
         {
             //task completed (when alive, or during suspend/terminated)
             AppLog.Write($"sender: {sender.Name}");
+        }
+
+        public static async Task TriggerBackgroundTask()
+        {
+            await _bgTaskTrigger.RequestAsync();
         }
 
         private void CheckActivationKind(ActivationKind kind)

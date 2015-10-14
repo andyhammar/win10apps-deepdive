@@ -56,9 +56,14 @@ namespace UwpDeepDive.MainApp.Views
             }
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void nextButton_OnClick(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof (LifecyclePageChild));
+        }
+
+        private async void TriggerButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            await App.TriggerBackgroundTask();
         }
     }
 }
