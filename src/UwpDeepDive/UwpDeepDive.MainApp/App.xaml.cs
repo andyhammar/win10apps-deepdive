@@ -5,10 +5,12 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.ExtendedExecution;
+using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -102,7 +104,16 @@ namespace UwpDeepDive.MainApp
 
             AppLog.Write($"kind: {args.Kind}");
 
+            await HandleToastActivation(args);
+
+            HandleProtocolActivation(args);
+        }
+
+        private static async Task HandleToastActivation(IActivatedEventArgs args)
+        {
             var e = args as ToastNotificationActivatedEventArgs;
+            if (e == null) return;
+
             var reply = e?.UserInput.Values.FirstOrDefault() as string;
             AppLog.Write($"arg: {e?.Argument}, reply: {reply}");
 
@@ -116,6 +127,23 @@ namespace UwpDeepDive.MainApp
             };
 
             await contentDialog.ShowAsync();
+        }
+
+        private void HandleProtocolActivation(IActivatedEventArgs args)
+        {
+            var e = args as ProtocolForResultsActivatedEventArgs;
+            if (e == null) return;
+
+            //check against whitelist?
+            AppLog.Write($"caller: {e.CallerPackageFamilyName}");
+
+            //var dialog = new MessageDialog($"Will now share your note with the app: {e.CallerPackageFamilyName}?");
+            //await dialog.ShowAsync();
+
+            var result = new ValueSet {{"note", ApplicationData.Current.LocalSettings.Values["note"] as string}};
+            e.ProtocolForResultsOperation.ReportCompleted(result);
+
+            Current.Exit();
         }
 
         private async Task RegisterBackgroundTasks()

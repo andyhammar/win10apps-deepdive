@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="11fc3805-6c54-417b-916c-a4f6e89876b2" Publisher="CN=andy" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="11fc3805-6c54-417b-916c-a4f6e89876b2" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="4dd6f423-ad4c-4619-8517-a112abf79a2e" Publisher="CN=andy" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="4dd6f423-ad4c-4619-8517-a112abf79a2e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>UwpDeepDive.MainApp</DisplayName>
+    <DisplayName>UwpDeepDive.RogueApp</DisplayName>
     <PublisherDisplayName>andy</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -14,8 +14,8 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="UwpDeepDive.MainApp.App">
-      <uap:VisualElements DisplayName="UwpDeepDive.MainApp" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="UwpDeepDive.MainApp" BackgroundColor="transparent">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="UwpDeepDive.RogueApp.App">
+      <uap:VisualElements DisplayName="UwpDeepDive.RogueApp" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="UwpDeepDive.RogueApp" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
@@ -24,13 +24,6 @@
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="uwpddmainapp" />
         </uap:Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="UwpDeepDive.Bg.AppBgTask">
-          <BackgroundTasks>
-            <Task Type="general" />
-            <Task Type="systemEvent" />
-            <Task Type="timer" />
-          </BackgroundTasks>
-        </Extension>
       </Extensions>
     </Application>
   </Applications>

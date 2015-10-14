@@ -1,9 +1,11 @@
 ﻿using System;
+using Windows.ApplicationModel;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using UwpDeepDive.MainApp.Helpers;
 using UwpDeepDive.MainApp.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -18,11 +20,12 @@ namespace UwpDeepDive.MainApp.Views
         public AppToAppPage()
         {
             this.InitializeComponent();
+            AppLog.Write($"PFN: {Package.Current.Id.FamilyName}");
         }
 
         private async void OpenBuddyAppButton_OnClick(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri("uwpdeepdive://"));
+            await Launcher.LaunchUriAsync(new Uri("uwpddbuddyapp://"));
         }
     }
 }
