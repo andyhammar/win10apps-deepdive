@@ -1,4 +1,6 @@
-﻿namespace UwpDeepDive.MainApp.ViewModels
+﻿using Windows.Storage;
+
+namespace UwpDeepDive.MainApp.ViewModels
 {
     public class LifecyclePageVm : VmBase
     {
@@ -6,13 +8,23 @@
 
         public LifecyclePageVm()
         {
-            UserText = "enter text here";
+
         }
 
-        public string UserText
+        public void InitUserText()
+        {
+            UserText = ApplicationData.Current.LocalSettings.Values["note"] as string;
+        }
+
+            public string UserText
         {
             get { return _userText; }
-            set { _userText = value; OnPropertyChanged();}
+            set
+            {
+                _userText = value;
+                OnPropertyChanged();
+                ApplicationData.Current.LocalSettings.Values["note"] = value;
+            }
         }
     }
 }

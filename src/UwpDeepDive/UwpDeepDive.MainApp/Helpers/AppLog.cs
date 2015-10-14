@@ -10,7 +10,7 @@ namespace UwpDeepDive.MainApp.Helpers
     {
         static readonly CultureInfo _culture = new CultureInfo("sv-se");
 
-        public static void Write([CallerFilePath]string callerFilePath = null, [CallerMemberName] string callerName = null, string text = null)
+        public static void Write(string text = null, [CallerFilePath]string callerFilePath = null, [CallerMemberName] string callerName = null)
         {
             var callerFileName = Path.GetFileNameWithoutExtension(callerFilePath);
             Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.ttt", _culture)} [{callerFileName}.{callerName}] {text}");

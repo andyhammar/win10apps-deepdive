@@ -168,7 +168,7 @@
 			RelativePanel.AlignRightWithPanel="true"
 			RelativePanel.AlignLeftWithPanel="true"
 			Text="{Binding UserText, Mode=TwoWay}"
-			Margin="8" HorizontalContentAlignment="Stretch" Style="{StaticResource TextBoxStyle1}" TextWrapping="Wrap"/>
+			Margin="8" HorizontalContentAlignment="Stretch" Style="{StaticResource TextBoxStyle1}" TextWrapping="Wrap" AcceptsReturn="True"/>
         <Button Content="Next"
                 RelativePanel.AlignRightWithPanel="True"
                 Margin="20"

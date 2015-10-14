@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UwpDeepDive.MainApp", "UwpDeepDive.MainApp\UwpDeepDive.MainApp.csproj", "{03CCA025-30AF-4846-BFDD-A9F11BAABFF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UwpDeepDive.Background", "UwpDeepDive.Background\UwpDeepDive.Background.csproj", "{398583F4-C68B-45BF-8C0C-501F752A8296}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UwpDeepDive.Bg", "UwpDeepDive.Background\UwpDeepDive.Bg.csproj", "{398583F4-C68B-45BF-8C0C-501F752A8296}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

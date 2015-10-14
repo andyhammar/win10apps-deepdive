@@ -183,6 +183,12 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UwpDeepDive.Background\UwpDeepDive.Bg.csproj">
+      <Project>{398583f4-c68b-45bf-8c0c-501f752a8296}</Project>
+      <Name>UwpDeepDive.Bg</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

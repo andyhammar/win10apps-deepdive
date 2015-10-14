@@ -7,8 +7,8 @@
     <ProjectGuid>{398583F4-C68B-45BF-8C0C-501F752A8296}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UwpDeepDive.Background</RootNamespace>
-    <AssemblyName>UwpDeepDive.Background</AssemblyName>
+    <RootNamespace>UwpDeepDive.Bg</RootNamespace>
+    <AssemblyName>UwpDeepDive.Bg</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>

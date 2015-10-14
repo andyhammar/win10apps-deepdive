@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -81,6 +83,45 @@ namespace UwpDeepDive.MainApp
 
             var systemNavigationManager = SystemNavigationManager.GetForCurrentView();
             systemNavigationManager.BackRequested += App_BackRequested;
+
+            RegisterBackgroundTasks();
+        }
+
+        private void RegisterBackgroundTasks()
+        {
+            foreach (var registration in BackgroundTaskRegistration.AllTasks.Values)
+            {
+                registration.Unregister(false);
+            }
+            RegisterTimerTask();
+        }
+
+        private void RegisterTimerTask()
+        {
+            RegisterTask("timerTask", new TimeTrigger(60, false));
+            RegisterTask("toastNotificationActionTask", new ToastNotificationActionTrigger());
+        }
+
+        private void RegisterTask(string name, IBackgroundTrigger trigger)
+        {
+            var taskName = name;
+
+            var builder = new BackgroundTaskBuilder
+            {
+                Name = taskName,
+                TaskEntryPoint = "UwpDeepDive.Bg.AppBgTask"
+            };
+
+            builder.SetTrigger(trigger);
+
+            var task = builder.Register();
+            task.Completed += Task_Completed;
+        }
+
+        private void Task_Completed(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
+        {
+            //task completed (when alive, or during suspend/terminated)
+            AppLog.Write($"sender: {sender.Name}");
         }
 
         private void CheckActivationKind(ActivationKind kind)

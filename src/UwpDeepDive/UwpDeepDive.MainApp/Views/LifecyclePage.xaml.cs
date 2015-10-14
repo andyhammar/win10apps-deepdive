@@ -28,8 +28,11 @@ namespace UwpDeepDive.MainApp.Views
             AppLog.Write();
             base.OnNavigatedTo(e);
 
+            _vm.InitUserText();
+
             if (e.NavigationMode != NavigationMode.Back)
             {
+                //handle re-entry with unwanted parameter?
                 HandleObjectParameter(e);
                 HandleStringParameter(e);
             }
@@ -47,7 +50,10 @@ namespace UwpDeepDive.MainApp.Views
             var text = navigationEventArgs.Parameter as string;
             if (text == null) return;
 
-            _vm.UserText = text;
+            if (string.IsNullOrEmpty(_vm.UserText))
+            {
+                _vm.UserText = text;
+            }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
