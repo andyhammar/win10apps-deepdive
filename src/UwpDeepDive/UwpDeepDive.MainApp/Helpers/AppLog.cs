@@ -16,4 +16,4 @@ namespace UwpDeepDive.MainApp.Helpers
             Debug.WriteLine($"{DateTime.Now.ToString("HH:mm:ss.ttt", _culture)} [{callerFileName}.{callerName}] {text}");
         }
     }
-}
+} 

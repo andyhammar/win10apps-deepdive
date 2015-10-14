@@ -41,7 +41,7 @@ namespace UwpDeepDive.MainApp
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
             AppLog.Write();
 
@@ -88,7 +88,7 @@ namespace UwpDeepDive.MainApp
             var systemNavigationManager = SystemNavigationManager.GetForCurrentView();
             systemNavigationManager.BackRequested += App_BackRequested;
 
-            RegisterBackgroundTasks();
+            await RegisterBackgroundTasks();
         }
 
         protected override async void OnActivated(IActivatedEventArgs args)
@@ -113,18 +113,20 @@ namespace UwpDeepDive.MainApp
             await contentDialog.ShowAsync();
         }
 
-        private void RegisterBackgroundTasks()
+        private async Task RegisterBackgroundTasks()
         {
             foreach (var registration in BackgroundTaskRegistration.AllTasks.Values)
             {
                 registration.Unregister(false);
             }
-            RegisterTimerTask();
+            await RegisterTask();
         }
 
-        private void RegisterTimerTask()
+        private async Task RegisterTask()
         {
-            RegisterTask("timerTask", new TimeTrigger(60, false));
+            var status = await BackgroundExecutionManager.RequestAccessAsync();
+            if (status != BackgroundAccessStatus.Denied)
+                RegisterTask("timerTask", new TimeTrigger(15, false));
             RegisterTask("toastNotificationActionTask", new ToastNotificationActionTrigger());
             RegisterTask("appTriggerTask", _bgTaskTrigger = new ApplicationTrigger());
         }

@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Windows.ApplicationModel.Background;
-using Windows.Data.Xml.Dom;
 using Windows.Storage;
 using Windows.UI.Notifications;
 using NotificationsExtensions.Toasts;
@@ -18,7 +18,13 @@ namespace UwpDeepDive.Bg
                 HandleToastNotificationResponse(toastNotificationResponse);
                 return;
             }
-            SendToast();
+            var appTriggerDetails = taskInstance.TriggerDetails as ApplicationTriggerDetails;
+            
+            //temp
+
+            SendToast(taskInstance.TriggerDetails?.GetType()?.Name);
+            
+            Debug.Write($"trigger details type: {taskInstance.TriggerDetails?.GetType()}");
         }
 
         private void HandleToastNotificationResponse(ToastNotificationActionTriggerDetail toastNotificationResponse)
@@ -33,7 +39,7 @@ namespace UwpDeepDive.Bg
             ApplicationData.Current.LocalSettings.Values["note"] = newNote;
         }
 
-        private void SendToast()
+        private void SendToast(string text = null)
         {
             ToastContent content = new ToastContent()
             {
@@ -49,6 +55,10 @@ namespace UwpDeepDive.Bg
                     BodyTextLine1 = new ToastText
                     {
                         Text = "Got a note to add?"
+                    },
+                    BodyTextLine2 = new ToastText()
+                    {
+                        Text = text ?? ""
                     }
                 },
 
