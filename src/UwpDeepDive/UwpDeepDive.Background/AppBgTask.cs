@@ -12,22 +12,35 @@ namespace UwpDeepDive.Bg
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
+            if (CheckBackgroundWorkCost()) return;
+
+            if (HandleToastResponse(taskInstance)) return;
+
+            SendToast(taskInstance.TriggerDetails?.GetType()?.Name);
+        }
+
+        private static bool CheckBackgroundWorkCost()
+        {
+            if (BackgroundWorkCost.CurrentBackgroundWorkCost == BackgroundWorkCostValue.High)
+            {
+                //being a good citizen
+                return true;
+            }
+            return false;
+        }
+
+        private bool HandleToastResponse(IBackgroundTaskInstance taskInstance)
+        {
             var toastNotificationResponse = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
             if (toastNotificationResponse != null)
             {
-                HandleToastNotificationResponse(toastNotificationResponse);
-                return;
+                SaveToastResponse(toastNotificationResponse);
+                return true;
             }
-            var appTriggerDetails = taskInstance.TriggerDetails as ApplicationTriggerDetails;
-            
-            //temp
-
-            SendToast(taskInstance.TriggerDetails?.GetType()?.Name);
-            
-            Debug.Write($"trigger details type: {taskInstance.TriggerDetails?.GetType()}");
+            return false;
         }
 
-        private void HandleToastNotificationResponse(ToastNotificationActionTriggerDetail toastNotificationResponse)
+        private void SaveToastResponse(ToastNotificationActionTriggerDetail toastNotificationResponse)
         {
             var userInput = toastNotificationResponse.UserInput;
             var reply = userInput.Values.FirstOrDefault();
