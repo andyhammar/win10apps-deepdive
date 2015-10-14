@@ -5,9 +5,11 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using UwpDeepDive.MainApp.Helpers;
 
@@ -87,6 +89,28 @@ namespace UwpDeepDive.MainApp
             systemNavigationManager.BackRequested += App_BackRequested;
 
             RegisterBackgroundTasks();
+        }
+
+        protected override async void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+
+            AppLog.Write($"kind: {args.Kind}");
+
+            var e = args as ToastNotificationActivatedEventArgs;
+            var reply = e?.UserInput.Values.FirstOrDefault() as string;
+            AppLog.Write($"arg: {e?.Argument}, reply: {reply}");
+
+
+            var contentDialog = new ContentDialog()
+            {
+                Content =
+                    new TextBlock {Text = reply ?? "", FontSize = 36, Foreground = new SolidColorBrush(Colors.Coral)},
+                PrimaryButtonText = "close",
+                IsPrimaryButtonEnabled = true
+            };
+
+            await contentDialog.ShowAsync();
         }
 
         private void RegisterBackgroundTasks()
