@@ -111,6 +111,9 @@
     <Compile Include="ViewModels\PageVmi.cs" />
     <Compile Include="ViewModels\VmBase.cs" />
     <Compile Include="ViewModels\XamlPageVm.cs" />
+    <Compile Include="Views\BackgroundPage.xaml.cs">
+      <DependentUpon>BackgroundPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AdaptivePage.xaml.cs">
       <DependentUpon>AdaptivePage.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BackgroundPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

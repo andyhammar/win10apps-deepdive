@@ -1,0 +1,28 @@
+﻿<local:PageBase
+    x:Class="UwpDeepDive.MainApp.Views.BackgroundPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UwpDeepDive.MainApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mainApp="using:UwpDeepDive.MainApp"
+    mc:Ignorable="d">
+
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <StackPanel x:Name="stackPanel"  
+                    RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"
+                    >
+            <TextBlock Text="Background" Style="{StaticResource AppHeaderTextBlockStyle}"/>
+            <Button Content="task ApplicationTrigger"
+                x:Name="triggerButton"
+                Margin="8"
+                Click="TriggerButton_OnClick"/>
+            <Button Content="extended exeution"
+                x:Name="extendedExecutionButton"
+                Margin="8"
+                Click="ExtendedExecutionButton_OnClick"/>
+        </StackPanel>
+        <Image x:Name="image" RelativePanel.RightOf="stackPanel" Source="http://d.ibtimes.co.uk/en/full/1451623/windows-10.jpg"/>
+    </RelativePanel>
+</local:PageBase>

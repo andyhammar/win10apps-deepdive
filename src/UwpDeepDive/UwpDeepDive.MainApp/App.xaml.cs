@@ -4,13 +4,16 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
+using Windows.ApplicationModel.ExtendedExecution;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using NotificationsExtensions.Toasts;
 using UwpDeepDive.MainApp.Helpers;
 
 namespace UwpDeepDive.MainApp
@@ -35,7 +38,9 @@ namespace UwpDeepDive.MainApp
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
-        
+
+        public static bool AskForExtendedExecutionOnNextSuspend { get; set; }
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -275,14 +280,68 @@ namespace UwpDeepDive.MainApp
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             AppLog.Write();
 
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             SaveNavigationState();
+
+            if (AskForExtendedExecutionOnNextSuspend)
+            {
+                AskForExtendedExecutionOnNextSuspend = false;
+                using (var session = new ExtendedExecutionSession() {Reason = ExtendedExecutionReason.SavingData})
+                {
+                    session.Revoked += (s, args) =>
+                    {
+                        AppLog.Write("extended execution revoked, reason: " + args.Reason);
+                    };
+                    session.Description = "toasting things up";
+                    var extendedExecutionResult = await session.RequestExtensionAsync();
+                    if (extendedExecutionResult == ExtendedExecutionResult.Allowed)
+                    {
+                        while (true)
+                        {
+                            await Task.Delay(TimeSpan.FromSeconds(10));
+                            ShowStillAliveToast();
+                        }                        
+                    }
+                }
+            }
             deferral.Complete();
+        }
+
+        private void ShowStillAliveToast()
+        {
+            ToastContent content = new ToastContent()
+            {
+                Launch = "toastResponse",
+
+                Visual = new ToastVisual()
+                {
+                    TitleText = new ToastText
+                    {
+                        Text = "Still alive!"
+                    },
+
+                    BodyTextLine1 = new ToastText
+                    {
+                        Text = DateTime.Now.ToString("G")
+                    },
+                },
+
+                Actions = new ToastActionsSnoozeAndDismiss()
+            };
+
+            var doc = content.GetXml();
+
+            // Generate WinRT notification
+            var toast = new ToastNotification(doc);
+
+            var notifier = ToastNotificationManager.CreateToastNotifier();
+            notifier.Show(toast);
+
         }
 
         private void SaveNavigationState()

@@ -33,10 +33,5 @@ namespace UwpDeepDive.MainApp.Views
         {
             Frame.Navigate(typeof (LifecyclePageChild), ((FrameworkElement)sender).Tag);
         }
-
-        private async void TriggerButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            await App.TriggerBackgroundTask();
-        }
     }
 }

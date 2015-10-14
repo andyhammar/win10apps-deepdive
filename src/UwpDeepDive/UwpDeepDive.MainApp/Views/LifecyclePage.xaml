@@ -182,11 +182,6 @@
                 Margin="8"
                 Click="nextButton_OnClick"
                 />
-            <Button Content="trigger task"
-                x:Name="triggerButton"
-
-                Margin="8"
-                Click="TriggerButton_OnClick"/>
         </StackPanel>
     </RelativePanel>
 </local:PageBase>
