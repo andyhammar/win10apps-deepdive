@@ -19,10 +19,6 @@ namespace UwpDeepDive.Bg
                 return;
             }
             SendToast();
-            //var toastNotifier = ToastNotificationManager.CreateToastNotifier();
-            //var templateContent = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
-
-            //toastNotifier.Show();
         }
 
         private void HandleToastNotificationResponse(ToastNotificationActionTriggerDetail toastNotificationResponse)
@@ -85,7 +81,7 @@ namespace UwpDeepDive.Bg
                 }
             };
 
-            XmlDocument doc = content.GetXml();
+            var doc = content.GetXml();
 
             // Generate WinRT notification
             var toast = new ToastNotification(doc);
@@ -94,7 +90,5 @@ namespace UwpDeepDive.Bg
             notifier.Show(toast);
 
         }
-
-
     }
 }

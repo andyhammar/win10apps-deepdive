@@ -8,7 +8,7 @@ namespace UwpDeepDive.MainApp.ViewModels
 
         public LifecyclePageVm()
         {
-
+            _userText = "initial user text";
         }
 
         public void InitUserText()
@@ -16,7 +16,7 @@ namespace UwpDeepDive.MainApp.ViewModels
             UserText = ApplicationData.Current.LocalSettings.Values["note"] as string;
         }
 
-            public string UserText
+        public string UserText
         {
             get { return _userText; }
             set

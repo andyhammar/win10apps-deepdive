@@ -162,24 +162,31 @@
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="header" Text="Lifecycle" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-        <Button Content="trigger task"
-                x:Name="triggerButton"
-                RelativePanel.AlignRightWithPanel="True"
-                RelativePanel.Below="nextButton"
-                Margin="8"
-                Click="TriggerButton_OnClick"/>
-        <TextBox x:Name="textBox" Header="text input" 
-			RelativePanel.Below="header"
-			RelativePanel.AlignRightWithPanel="true"
-			RelativePanel.AlignLeftWithPanel="true"
-                 RelativePanel.AlignBottomWithPanel="True"
-			Text="{Binding UserText, Mode=TwoWay}"
-			Margin="8" HorizontalContentAlignment="Stretch" Style="{StaticResource TextBoxStyle1}" TextWrapping="Wrap" AcceptsReturn="True"/>
-        <Button Content="Next"
-                RelativePanel.AlignRightWithPanel="True"
+        <StackPanel RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.Below="header">
+        <Button Content="Edit (param via object)"
+                
                 Margin="8"
                 Click="nextButton_OnClick"
-                x:Name="nextButton"
+                Tag="{Binding}"
                 />
+            <Button Content="Edit (param via string)"
+                
+                Margin="8"
+                Click="nextButton_OnClick"
+                Tag="parameter via string"
+                />
+
+            <Button Content="Edit"
+                
+                Margin="8"
+                Click="nextButton_OnClick"
+                />
+            <Button Content="trigger task"
+                x:Name="triggerButton"
+
+                Margin="8"
+                Click="TriggerButton_OnClick"/>
+        </StackPanel>
     </RelativePanel>
 </local:PageBase>

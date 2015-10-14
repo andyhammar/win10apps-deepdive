@@ -162,9 +162,13 @@
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="header" Text="LifecycleChild" Style="{StaticResource AppHeaderTextBlockStyle}"
                    RelativePanel.AlignTopWithPanel="True"/>
-        <TextBlock Text="HELLO" Style="{StaticResource AppHeaderTextBlockStyle}"
-                   RelativePanel.AlignHorizontalCenterWithPanel="True"
-                   RelativePanel.AlignVerticalCenterWithPanel="True"/>
+        <TextBox x:Name="textBox" Header="text input" 
+			RelativePanel.Below="header"
+			RelativePanel.AlignRightWithPanel="true"
+			RelativePanel.AlignLeftWithPanel="true"
+                 RelativePanel.AlignBottomWithPanel="True"
+			Text="{Binding UserText, Mode=TwoWay}"
+			Margin="8" HorizontalContentAlignment="Stretch" Style="{StaticResource TextBoxStyle1}" TextWrapping="Wrap" AcceptsReturn="True"/>
 
     </RelativePanel>
 </local:PageBase>

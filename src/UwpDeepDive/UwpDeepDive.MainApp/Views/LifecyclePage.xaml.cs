@@ -27,38 +27,11 @@ namespace UwpDeepDive.MainApp.Views
         {
             AppLog.Write();
             base.OnNavigatedTo(e);
-
-            _vm.InitUserText();
-
-            if (e.NavigationMode != NavigationMode.Back)
-            {
-                //handle re-entry with unwanted parameter?
-                HandleObjectParameter(e);
-                HandleStringParameter(e);
-            }
-        }
-
-        private void HandleObjectParameter(NavigationEventArgs navigationEventArgs)
-        {
-            var vm = navigationEventArgs.Parameter as LifecyclePageVm;
-            if (vm == null) return;
-            DataContext = _vm = vm;
-        }
-
-        private void HandleStringParameter(NavigationEventArgs navigationEventArgs)
-        {
-            var text = navigationEventArgs.Parameter as string;
-            if (text == null) return;
-
-            if (string.IsNullOrEmpty(_vm.UserText))
-            {
-                _vm.UserText = text;
-            }
         }
 
         private void nextButton_OnClick(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof (LifecyclePageChild));
+            Frame.Navigate(typeof (LifecyclePageChild), ((FrameworkElement)sender).Tag);
         }
 
         private async void TriggerButton_OnClick(object sender, RoutedEventArgs e)
