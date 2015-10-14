@@ -14,7 +14,7 @@
                     RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True"
                     >
             <TextBlock Text="Background" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-            <Button Content="task ApplicationTrigger"
+            <Button Content="ApplicationTrigger"
                 x:Name="triggerButton"
                 Margin="8"
                 Click="TriggerButton_OnClick"/>
