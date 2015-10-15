@@ -23,6 +23,7 @@ namespace UwpDeepDive.MainApp.Views
         public void InitProtocolResponse(ProtocolForResultsActivatedEventArgs args)
         {
             _args = args;
+            _callerNameTextBlock.Text = args.CallerPackageFamilyName;
         }
 
         private void YesButton_OnClick(object sender, RoutedEventArgs e)

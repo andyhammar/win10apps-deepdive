@@ -11,9 +11,9 @@ namespace UwpDeepDive.BuddyApp
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class BuddyMainPage : Page
     {
-        public MainPage()
+        public BuddyMainPage()
         {
             this.InitializeComponent();
         }
@@ -33,7 +33,7 @@ namespace UwpDeepDive.BuddyApp
             var launchUriResult = await Launcher.LaunchUriForResultsAsync(uri, options);
             if (launchUriResult.Status == LaunchUriStatus.Success)
             {
-                _resultsTextBox.Text = (launchUriResult.Result.FirstOrDefault().Value as string) ?? "error";
+                _resultsTextBox.Text = (launchUriResult.Result?.FirstOrDefault().Value as string) ?? "no response";
             }
         }
     }
