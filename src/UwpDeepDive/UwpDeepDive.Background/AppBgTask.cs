@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using Windows.ApplicationModel.AppService;
 using Windows.ApplicationModel.Background;
+using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI.Notifications;
 using NotificationsExtensions.Toasts;
@@ -16,7 +18,45 @@ namespace UwpDeepDive.Bg
 
             if (HandleToastResponse(taskInstance)) return;
 
+            if (HandleAppServiceCall(taskInstance)) return;
+
             SendToast(taskInstance.TriggerDetails?.GetType()?.Name);
+        }
+
+        private bool HandleAppServiceCall(IBackgroundTaskInstance taskInstance)
+        {
+            var appServiceTriggerDetails = taskInstance.TriggerDetails as AppServiceTriggerDetails;
+            if (appServiceTriggerDetails == null) return false;
+
+            if (appServiceTriggerDetails.Name == "uwpdeepdive-appservice")
+            {
+                appServiceTriggerDetails.AppServiceConnection.RequestReceived += AppServiceConnection_RequestReceived;
+            }
+            return true;
+        }
+
+        private async void AppServiceConnection_RequestReceived(
+            AppServiceConnection sender,
+            AppServiceRequestReceivedEventArgs args)
+        {
+            var appServiceDeferral = args.GetDeferral();
+
+            var msg = args.Request.Message;
+            var cmd = msg["cmd"] as string;
+            if (cmd == null) return;
+
+            if (cmd == "time")
+            {
+                var result = new ValueSet { { "time", DateTime.Now.ToString("T") } };
+                await args.Request.SendResponseAsync(result);
+            }
+            else if (cmd == "note")
+            {
+                var result = new ValueSet { { "note", ApplicationData.Current.LocalSettings.Values["note"] } };
+                await args.Request.SendResponseAsync(result);
+            }
+
+            appServiceDeferral.Complete();
         }
 
         private static bool CheckBackgroundWorkCost()

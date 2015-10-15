@@ -21,8 +21,8 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="uwpddmainapp" />
+        <uap:Extension Category="windows.appService" EntryPoint="UwpDeepDive.Bg.AppBgTask">
+          <uap:AppService Name="uwpdeepdive-appservice" />
         </uap:Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="UwpDeepDive.Bg.AppBgTask">
           <BackgroundTasks>
@@ -31,6 +31,9 @@
             <Task Type="timer" />
           </BackgroundTasks>
         </Extension>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="uwpddmainapp" />
+        </uap:Extension>
       </Extensions>
     </Application>
   </Applications>
