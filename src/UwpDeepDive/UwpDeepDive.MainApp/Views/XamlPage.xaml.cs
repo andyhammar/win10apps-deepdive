@@ -13,7 +13,7 @@ namespace UwpDeepDive.MainApp.Views
     /// </summary>
     public sealed partial class XamlPage
     {
-        private XamlPageVm _vm;
+        private readonly XamlPageVm _vm;
 
         public XamlPage()
         {

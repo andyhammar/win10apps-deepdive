@@ -4,9 +4,9 @@
     xmlns:local="using:UwpDeepDive.MainApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ViewModels="using:UwpDeepDive.MainApp.ViewModels"
+    xmlns:viewModels="using:UwpDeepDive.MainApp.ViewModels"
     x:Class="UwpDeepDive.MainApp.Views.XamlPage"
-    mc:Ignorable="d" d:DataContext="{d:DesignInstance ViewModels:XamlPageVm}">
+    mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:XamlPageVm, d:IsDesignTimeCreatable=True}">
     <local:PageBase.Resources>
         <DataTemplate x:Key="DataTemplate_Binding">
             <Grid>
@@ -23,7 +23,7 @@
                 <Image Grid.RowSpan="2" Source="{Binding ImageUri}" Height="60" Width="60" Margin="0,0,10,0"/>
             </Grid>
         </DataTemplate>
-        <DataTemplate x:Key="DataTemplate_XBind" x:DataType="ViewModels:NewsItemVmi">
+        <DataTemplate x:Key="DataTemplate_XBind" x:DataType="viewModels:NewsItemVmi">
             <RelativePanel>
                 <Image x:Name="image" Source="{x:Bind ImageUri}"
                        x:Phase="2" Height="60" Width="60" Margin="0,0,8,0"/>
@@ -70,10 +70,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Binding" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-        <ListView x:Name="listView" Grid.Row="1" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_Binding}" />
+        <TextBlock Text="{Binding BindingTitle}" Style="{StaticResource AppHeaderTextBlockStyle}"/>
+        <ListView x:Name="listView" Grid.Row="1" 
+                  ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_Binding}" />
         <TextBlock Grid.Row="2" Text="x:Bind" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-        <ListView Grid.Row="3" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_XBind}" />
+        <ListView Grid.Row="3" 
+                  ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_XBind}" />
         <Button x:Name="button" Grid.RowSpan="4" Content="override image" VerticalAlignment="Center" Grid.Column="1" Visibility="Collapsed"
                 Click="button_Click"/>
         <Image x:Name="_lazyImage" Width="200" Grid.Column="2" Visibility="Collapsed"
