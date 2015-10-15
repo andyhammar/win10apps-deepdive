@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using NotificationsExtensions.Toasts;
 using UwpDeepDive.MainApp.Helpers;
+using UwpDeepDive.MainApp.Views;
 
 namespace UwpDeepDive.MainApp
 {
@@ -140,10 +141,12 @@ namespace UwpDeepDive.MainApp
             //var dialog = new MessageDialog($"Will now share your note with the app: {e.CallerPackageFamilyName}?");
             //await dialog.ShowAsync();
 
-            var result = new ValueSet {{"note", ApplicationData.Current.LocalSettings.Values["note"] as string}};
-            e.ProtocolForResultsOperation.ReportCompleted(result);
+            //Current.Exit();
+            var page = new ProtocolForResultsPage();
+            page.InitProtocolResponse(e);
+            Window.Current.Content = page;
+            Window.Current.Activate();
 
-            Current.Exit();
         }
 
         private async Task RegisterBackgroundTasks()
