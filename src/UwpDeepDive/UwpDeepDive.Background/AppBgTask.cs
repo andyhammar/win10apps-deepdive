@@ -45,16 +45,17 @@ namespace UwpDeepDive.Bg
             var cmd = msg["cmd"] as string;
             if (cmd == null) return;
 
+            var response = string.Empty;
             if (cmd == "time")
             {
-                var result = new ValueSet { { "time", DateTime.Now.ToString("T") } };
-                await args.Request.SendResponseAsync(result);
+                response = DateTime.Now.ToString("T");
             }
             else if (cmd == "note")
             {
-                var result = new ValueSet { { "note", ApplicationData.Current.LocalSettings.Values["note"] } };
-                await args.Request.SendResponseAsync(result);
+                response = ApplicationData.Current.LocalSettings.Values["note"] as string;
             }
+            var result = new ValueSet { { cmd, response } };
+            await args.Request.SendResponseAsync(result);
 
             appServiceDeferral.Complete();
         }

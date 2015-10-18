@@ -71,6 +71,10 @@ namespace UwpDeepDive.BuddyApp
             }
             var time = appServiceResponse.Message[cmd] as string;
             _resultsTextBox.Text = time ?? "";
+
+            //note - communication is two-way! can send/receive as needed
+            //connection.RequestReceived += delegate(
+            //    AppServiceConnection sender, AppServiceRequestReceivedEventArgs args) { /* ... */ };
         }
     }
 }
