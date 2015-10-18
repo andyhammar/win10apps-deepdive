@@ -164,27 +164,30 @@
         <TextBlock x:Name="header" Text="Lifecycle" Style="{StaticResource AppHeaderTextBlockStyle}"/>
         <StackPanel RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.Below="header">
-        <Button Content="Edit (param via object)"
-                
-                Margin="8"
+            <StackPanel.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="8"/>
+                    </Style>
+                </ResourceDictionary>
+            </StackPanel.Resources>
+            <Button 
+                Content="Edit (param via object)"                
                 Click="nextButton_OnClick"
                 Tag="{Binding}"
                 />
-            <Button Content="Edit (param via string)"
-                
-                Margin="8"
+            <Button 
+                Content="Edit (param via string)"
                 Click="nextButton_OnClick"
-                Tag="parameter via string"
+                Tag="button tag as a string"
                 />
 
-            <Button Content="Edit"
-                
-                Margin="8"
+            <Button Content="Edit"                
                 Click="nextButton_OnClick"
                 />
+            <Border Height="40"/> <!-- for spacing -->
             <Button
                 Content="Go to page of no return"
-                Margin="8,40,8,8"
                 Click="ButtonBase_OnClick"/>
         </StackPanel>
     </RelativePanel>
