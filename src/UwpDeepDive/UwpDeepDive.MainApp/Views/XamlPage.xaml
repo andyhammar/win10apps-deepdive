@@ -8,6 +8,7 @@
     x:Class="UwpDeepDive.MainApp.Views.XamlPage"
     mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:XamlPageVm, d:IsDesignTimeCreatable=True}">
     <local:PageBase.Resources>
+        
         <DataTemplate x:Key="DataTemplate_Binding">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -18,20 +19,35 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="{Binding Title}" Grid.Column="1"/>
-                <TextBlock Text="{Binding Date}" Grid.Row="1" Grid.Column="1"/>
-                <Image Grid.RowSpan="2" Source="{Binding ImageUri}" Height="60" Width="60" Margin="0,0,10,0"/>
+                <TextBlock 
+                    Text="{Binding Title}" 
+                    Grid.Column="1"/>
+                <TextBlock 
+                    Text="{Binding Date}" 
+                    Grid.Row="1" Grid.Column="1"/>
+                <Image 
+                    Source="{Binding ImageUri}" 
+                    Grid.RowSpan="2" Grid.Row="0" Grid.Column="0" 
+                    Height="60" Width="60" Margin="0,0,10,0"/>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="DataTemplate_XBind" x:DataType="viewModels:NewsItemVmi">
             <RelativePanel>
-                <Image x:Name="image" Source="{x:Bind ImageUri}"
-                       x:Phase="2" Height="60" Width="60" Margin="0,0,8,0"/>
-                <TextBlock x:Name="title" Text="{x:Bind Title}" 
-                           RelativePanel.RightOf="image" />
-                <TextBlock x:Name="date" Text="{x:Bind Date}" 
-                           RelativePanel.RightOf="image" RelativePanel.Below="title"
-                           x:Phase="1"/>
+                <TextBlock 
+                    Text="{x:Bind Title}"
+                    x:Name="title"  
+                    RelativePanel.RightOf="{Binding ElementName=image}" />
+                <TextBlock 
+                    Text="{x:Bind Date}"
+                    x:Name="date"  
+                    RelativePanel.RightOf="{Binding ElementName=image}" 
+                    RelativePanel.Below="{Binding ElementName=title}"
+                    x:Phase="1"/>
+                <Image 
+                    Source="{x:Bind ImageUri}"
+                    x:Name="image" 
+                    Height="60" Width="60" Margin="0,0,8,0"
+                    x:Phase="2"/>
             </RelativePanel>
         </DataTemplate>
     </local:PageBase.Resources>
@@ -45,12 +61,12 @@
                         <AdaptiveTrigger MinWindowWidth="600"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="button.(UIElement.Visibility)" Value="Visible"/>
+                        <Setter Target="_button.(UIElement.Visibility)" Value="Visible"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="FullWide">
                     <VisualState.Setters>
-                        <Setter Target="button.(UIElement.Visibility)" Value="Visible"/>
+                        <Setter Target="_button.(UIElement.Visibility)" Value="Visible"/>
                         <Setter Target="_lazyImage.(UIElement.Visibility)" Value="Visible"/>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
@@ -70,16 +86,34 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding BindingTitle}" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-        <ListView x:Name="listView" Grid.Row="1" 
-                  ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_Binding}" />
-        <TextBlock Grid.Row="2" Text="x:Bind" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-        <ListView Grid.Row="3" 
-                  ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate_XBind}" />
-        <Button x:Name="button" Grid.RowSpan="4" Content="override image" VerticalAlignment="Center" Grid.Column="1" Visibility="Collapsed"
-                Click="button_Click"/>
-        <Image x:Name="_lazyImage" Width="200" Grid.Column="2" Visibility="Collapsed"
-               Grid.RowSpan="4" VerticalAlignment="Center"
-               x:DeferLoadStrategy="Lazy" Source="{Binding SelectedItem.ImageUri, ElementName=listView}"/>
+        
+        <TextBlock 
+            Text="{Binding BindingTitle}" Style="{StaticResource AppHeaderTextBlockStyle}"/>
+        <TextBlock 
+            Grid.Row="2" Grid.Column="0"
+            Text="x:Bind" Style="{StaticResource AppHeaderTextBlockStyle}"/>
+
+        <ListView 
+            x:Name="_listViewBinding" 
+            Grid.Row="1" Grid.Column="0"
+            ItemsSource="{Binding NewsItems}" 
+            ItemTemplate="{StaticResource DataTemplate_Binding}" />
+                
+        <ListView x:Name="_listViewXBind" 
+            Grid.Row="3" Grid.Column="0"
+            ItemsSource="{Binding NewsItems}" 
+            ItemTemplate="{StaticResource DataTemplate_XBind}" />
+
+        <Button 
+            x:Name="_button"
+            Grid.RowSpan="4" Content="override image" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" 
+            Visibility="Collapsed"
+            Click="button_Click"/>
+
+        <Image 
+            x:DeferLoadStrategy="Lazy" 
+            x:Name="_lazyImage" Width="200" Grid.Column="2" Visibility="Collapsed" Grid.Row="0"
+            Grid.RowSpan="4" VerticalAlignment="Center"
+            Source="{Binding SelectedItem.ImageUri, ElementName=_listViewBinding}"/>
     </Grid>
 </local:PageBase>
