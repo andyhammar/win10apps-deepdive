@@ -16,20 +16,28 @@ namespace UwpDeepDive.MainApp.Views
 
         private void UpdateBackButton()
         {
-            var frame = Window.Current.Content as Frame;
-            if (frame == null)
-            {
-                frame = Frame;
-                if (frame == null)
-                    return;
-            }
+            Frame frame;
+            if (GetFrame(out frame)) return;
 
             var canGoBack = frame.CanGoBack;
             var appViewBackButtonVisibility = canGoBack
                 ? AppViewBackButtonVisibility.Visible
                 : AppViewBackButtonVisibility.Collapsed;
+
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 appViewBackButtonVisibility;
+        }
+
+        private bool GetFrame(out Frame frame)
+        {
+            frame = Window.Current.Content as Frame;
+            if (frame == null)
+            {
+                frame = Frame;
+                if (frame == null)
+                    return true;
+            }
+            return false;
         }
     }
 }

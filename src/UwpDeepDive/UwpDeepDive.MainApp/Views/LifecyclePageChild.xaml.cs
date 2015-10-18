@@ -17,14 +17,11 @@ namespace UwpDeepDive.MainApp.Views
         {
             InitializeComponent();
             AppLog.Write();
-            DataContext = _vm = new LifecyclePageVm();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
-            _vm.InitUserText();
 
             HandleObjectParameter(e);
             HandleStringParameter(e);
@@ -39,12 +36,13 @@ namespace UwpDeepDive.MainApp.Views
 
         private void HandleStringParameter(NavigationEventArgs navigationEventArgs)
         {
-            var text = navigationEventArgs.Parameter as string;
-            if (text == null) return;
+            var param = navigationEventArgs.Parameter as string;
+            if (string.IsNullOrEmpty(param)) return;
 
-            if (string.IsNullOrEmpty(_vm.UserText))
+            if (param == "loadnote")
             {
-                _vm.UserText = text;
+                DataContext = _vm = new LifecyclePageVm();
+                _vm.InitUserTextFromPersistentStorage();
             }
         }
     }

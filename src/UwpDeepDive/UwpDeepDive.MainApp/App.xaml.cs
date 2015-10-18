@@ -75,7 +75,7 @@ namespace UwpDeepDive.MainApp
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: Load state from previously suspended application
+                    //Recover - if it makes sense!
                     RecoverNavigationState(_rootFrame);
                 }
 
@@ -199,6 +199,7 @@ namespace UwpDeepDive.MainApp
 
         private void CheckActivationKind(ActivationKind kind)
         {
+            AppLog.Write(kind.ToString());
             switch (kind)
             {
                 case ActivationKind.Launch:
@@ -266,6 +267,7 @@ namespace UwpDeepDive.MainApp
 
         private void CheckPreviousExecutionState(ApplicationExecutionState previousExecutionState)
         {
+            AppLog.Write(previousExecutionState.ToString());
             switch (previousExecutionState)
             {
                 case ApplicationExecutionState.NotRunning:
@@ -322,15 +324,33 @@ namespace UwpDeepDive.MainApp
             //TODO: Save application state and stop any background activity
             SaveNavigationState();
 
+            await CheckExtendedExecution();
+
+            deferral.Complete();
+        }
+
+        private void SaveNavigationState()
+        {
+            var naviState = _rootFrame.GetNavigationState();
+            ApplicationData.Current.LocalSettings.Values["naviState"] = naviState;
+        }
+
+        private void RecoverNavigationState(Frame rootFrame)
+        {
+            var naviState = ApplicationData.Current.LocalSettings.Values["naviState"] as string;
+            if (naviState == null) return;
+
+            rootFrame.SetNavigationState(naviState);
+        }
+
+        private async Task CheckExtendedExecution()
+        {
             if (AskForExtendedExecutionOnNextSuspend)
             {
                 AskForExtendedExecutionOnNextSuspend = false;
                 using (var session = new ExtendedExecutionSession() {Reason = ExtendedExecutionReason.SavingData})
                 {
-                    session.Revoked += (s, args) =>
-                    {
-                        AppLog.Write("extended execution revoked, reason: " + args.Reason);
-                    };
+                    session.Revoked += (s, args) => { AppLog.Write("extended execution revoked, reason: " + args.Reason); };
                     session.Description = "toasting things up";
                     var extendedExecutionResult = await session.RequestExtensionAsync();
                     if (extendedExecutionResult == ExtendedExecutionResult.Allowed)
@@ -339,11 +359,10 @@ namespace UwpDeepDive.MainApp
                         {
                             await Task.Delay(TimeSpan.FromSeconds(10));
                             ShowStillAliveToast();
-                        }                        
+                        }
                     }
                 }
             }
-            deferral.Complete();
         }
 
         private void ShowStillAliveToast()
@@ -376,20 +395,6 @@ namespace UwpDeepDive.MainApp
             var notifier = ToastNotificationManager.CreateToastNotifier();
             notifier.Show(toast);
 
-        }
-
-        private void SaveNavigationState()
-        {
-            var naviState = _rootFrame.GetNavigationState();
-            ApplicationData.Current.LocalSettings.Values["naviState"] = naviState;
-        }
-
-        private void RecoverNavigationState(Frame rootFrame)
-        {
-            var naviState = ApplicationData.Current.LocalSettings.Values["naviState"] as string;
-            if (naviState == null) return;
-
-            rootFrame.SetNavigationState(naviState);
         }
     }
 }

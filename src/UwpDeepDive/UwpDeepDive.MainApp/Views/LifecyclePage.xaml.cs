@@ -12,12 +12,10 @@ namespace UwpDeepDive.MainApp.Views
     /// </summary>
     public sealed partial class LifecyclePage
     {
-        private LifecyclePageVm _vm;
-
         public LifecyclePage()
         {
             InitializeComponent();
-            DataContext = _vm = new LifecyclePageVm();
+            DataContext = new LifecyclePageVm();
             AppLog.Write();
 
             NavigationCacheMode = NavigationCacheMode.Required;
