@@ -96,7 +96,7 @@ namespace UwpDeepDive.MainApp
             var systemNavigationManager = SystemNavigationManager.GetForCurrentView();
             systemNavigationManager.BackRequested += App_BackRequested;
 
-            await RegisterBackgroundTasks();
+            await RefreshBackgroundTasks();
         }
 
         protected override async void OnActivated(IActivatedEventArgs args)
@@ -149,21 +149,24 @@ namespace UwpDeepDive.MainApp
 
         }
 
-        private async Task RegisterBackgroundTasks()
+        private async Task RefreshBackgroundTasks()
         {
             foreach (var registration in BackgroundTaskRegistration.AllTasks.Values)
             {
                 registration.Unregister(false);
             }
-            await RegisterTask();
+            await RegisterTasks();
         }
 
-        private async Task RegisterTask()
+        private async Task RegisterTasks()
         {
             var status = await BackgroundExecutionManager.RequestAccessAsync();
             if (status != BackgroundAccessStatus.Denied)
-                RegisterTask("timerTask", new TimeTrigger(15, false));
+            {
+                RegisterTask("timerTask", new TimeTrigger(240, false));
+            }
             RegisterTask("toastNotificationActionTask", new ToastNotificationActionTrigger());
+
             RegisterTask("appTriggerTask", _bgTaskTrigger = new ApplicationTrigger());
         }
 

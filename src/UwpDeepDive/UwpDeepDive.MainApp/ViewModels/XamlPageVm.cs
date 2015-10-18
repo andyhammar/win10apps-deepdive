@@ -13,11 +13,11 @@ namespace UwpDeepDive.MainApp.ViewModels
         {
             BindingTitle = "Binding";
             NewsItems = new ObservableCollection<NewsItemVmi>();
-            //if (DesignMode.DesignModeEnabled)
-            //{
+            if (DesignMode.DesignModeEnabled)
+            {
                 NewsItems.Add(new NewsItemVmi { Title = "first", Description = "description", ImageUri = "https://pbs.twimg.com/profile_images/508960761826131968/LnvhR8ED.png" });
                 NewsItems.Add(new NewsItemVmi { Title = "second", Description = "description", ImageUri = "https://pbs.twimg.com/profile_images/508960761826131968/LnvhR8ED.png" });
-            //}
+            }
         }
         public async Task Init()
         {
