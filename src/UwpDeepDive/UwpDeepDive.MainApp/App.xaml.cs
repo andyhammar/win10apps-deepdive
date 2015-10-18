@@ -182,6 +182,9 @@ namespace UwpDeepDive.MainApp
 
             builder.SetTrigger(trigger);
 
+            builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+            builder.AddCondition(new SystemCondition(SystemConditionType.UserPresent));
+
             var task = builder.Register();
             task.Completed += Task_Completed;
         }

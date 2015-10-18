@@ -94,7 +94,7 @@ namespace UwpDeepDive.Bg
 
         private void SendToast(string text = null)
         {
-            ToastContent content = new ToastContent()
+            var content = new ToastContent()
             {
                 Launch = "toastResponse",
 
@@ -138,7 +138,7 @@ namespace UwpDeepDive.Bg
                     }
                 },
 
-                Audio = new ToastAudio()
+                Audio = new ToastAudio
                 {
                     Src = new Uri("ms-winsoundevent:Notification.IM")
                 }
@@ -152,6 +152,26 @@ namespace UwpDeepDive.Bg
             var notifier = ToastNotificationManager.CreateToastNotifier();
             notifier.Show(toast);
 
+            //Debug.WriteLine(content.GetContent());
+            /*
+            <?xml version="1.0" encoding="UTF-8"?>
+                <toast launch="toastResponse">
+                    <visual>
+                        <binding template="ToastGeneric">
+                            <text>UwpDeepDive notification</text>
+                            <text>Got a note to add?</text>
+                            <text>ApplicationTriggerDetails</text>
+                        </binding>
+                    </visual>
+                    <audio src="ms-winsoundevent:Notification.IM" />
+                    <actions>
+                        <input id="tbReply" type="text" placeHolderContent="add note here" />
+                        <action content="save" arguments="save" activationType="background" />
+                        <action content="launch" arguments="launch" />
+                    </actions>
+                </toast>
+            </xml>
+            */
         }
     }
 }
