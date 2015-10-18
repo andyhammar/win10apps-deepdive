@@ -182,6 +182,10 @@
                 Margin="8"
                 Click="nextButton_OnClick"
                 />
+            <Button
+                Content="Go to page of no return"
+                Margin="8,40,8,8"
+                Click="ButtonBase_OnClick"/>
         </StackPanel>
     </RelativePanel>
 </local:PageBase>

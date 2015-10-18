@@ -130,6 +130,9 @@
     <Compile Include="Views\AppToAppPage.xaml.cs">
       <DependentUpon>AppToAppPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PageOfNoReturn.xaml.cs">
+      <DependentUpon>PageOfNoReturn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProtocolForResultsPage.xaml.cs">
       <DependentUpon>ProtocolForResultsPage.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,10 @@
     <Page Include="Views\AppToAppPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PageOfNoReturn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProtocolForResultsPage.xaml">
       <SubType>Designer</SubType>

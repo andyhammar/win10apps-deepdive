@@ -33,5 +33,10 @@ namespace UwpDeepDive.MainApp.Views
         {
             Frame.Navigate(typeof (LifecyclePageChild), ((FrameworkElement)sender).Tag);
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof (PageOfNoReturn));
+        }
     }
 }
