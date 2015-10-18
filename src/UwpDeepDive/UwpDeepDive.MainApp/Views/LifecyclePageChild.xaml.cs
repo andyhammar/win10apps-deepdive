@@ -45,5 +45,10 @@ namespace UwpDeepDive.MainApp.Views
                 _vm.InitUserTextFromPersistentStorage();
             }
         }
+
+        private void textBox_LostFocus(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+
+        }
     }
 }

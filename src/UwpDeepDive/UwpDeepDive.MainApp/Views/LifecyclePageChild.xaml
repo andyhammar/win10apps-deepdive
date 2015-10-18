@@ -168,7 +168,7 @@
 			RelativePanel.AlignLeftWithPanel="true"
                  RelativePanel.AlignBottomWithPanel="True"
 			Text="{Binding UserText, Mode=TwoWay}"
-			Margin="8" HorizontalContentAlignment="Stretch" Style="{StaticResource TextBoxStyle1}" TextWrapping="Wrap" AcceptsReturn="True"/>
+			Margin="8" HorizontalContentAlignment="Stretch" Style="{StaticResource TextBoxStyle1}" TextWrapping="Wrap" AcceptsReturn="True" LostFocus="textBox_LostFocus"/>
 
     </RelativePanel>
 </local:PageBase>

@@ -8,12 +8,15 @@ namespace UwpDeepDive.MainApp.ViewModels
 
         public LifecyclePageVm()
         {
-            UserText = "view model constructur text";
+            _userText = "placeholder\\r\\ntext";
         }
 
         public void InitUserTextFromPersistentStorage()
         {
-            UserText = ApplicationData.Current.LocalSettings.Values["note"] as string;
+            var userText = ApplicationData.Current.LocalSettings.Values["note"] as string;
+            if (string.IsNullOrEmpty(userText))
+                return;
+            UserText = userText;
         }
 
         public string UserText

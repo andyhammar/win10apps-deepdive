@@ -12,11 +12,16 @@ namespace UwpDeepDive.MainApp.Views
     /// </summary>
     public sealed partial class LifecyclePage
     {
+        private LifecyclePageVm _vm;
+
         public LifecyclePage()
         {
             InitializeComponent();
-            DataContext = new LifecyclePageVm();
+
             AppLog.Write();
+
+            DataContext = _vm = new LifecyclePageVm();
+            _vm.InitUserTextFromPersistentStorage();
 
             NavigationCacheMode = NavigationCacheMode.Required;
         }
@@ -25,6 +30,13 @@ namespace UwpDeepDive.MainApp.Views
         {
             AppLog.Write();
             base.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+            if (e.NavigationMode == NavigationMode.Back)
+                NavigationCacheMode = NavigationCacheMode.Disabled;
         }
 
         private void nextButton_OnClick(object sender, RoutedEventArgs e)
