@@ -5,6 +5,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.ExtendedExecution;
+using Windows.Devices.HumanInterfaceDevice;
 using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.UI;
@@ -107,7 +108,11 @@ namespace UwpDeepDive.MainApp
 
             await HandleToastActivation(args);
 
-            HandleProtocolActivation(args);
+            if (HandleProtocolForResultsActivation(args))
+                return;
+
+            if (HandleProtocolActivation(args))
+                return;
         }
 
         private static async Task HandleToastActivation(IActivatedEventArgs args)
@@ -122,7 +127,7 @@ namespace UwpDeepDive.MainApp
             var contentDialog = new ContentDialog()
             {
                 Content =
-                    new TextBlock {Text = reply ?? "", FontSize = 36, Foreground = new SolidColorBrush(Colors.Coral)},
+                    new TextBlock { Text = reply ?? "", FontSize = 36, Foreground = new SolidColorBrush(Colors.Coral) },
                 PrimaryButtonText = "close",
                 IsPrimaryButtonEnabled = true
             };
@@ -130,10 +135,10 @@ namespace UwpDeepDive.MainApp
             await contentDialog.ShowAsync();
         }
 
-        private void HandleProtocolActivation(IActivatedEventArgs args)
+        private bool HandleProtocolForResultsActivation(IActivatedEventArgs args)
         {
             var e = args as ProtocolForResultsActivatedEventArgs;
-            if (e == null) return;
+            if (e == null) return false;
 
             //check against whitelist?
             AppLog.Write($"caller: {e.CallerPackageFamilyName}");
@@ -146,7 +151,18 @@ namespace UwpDeepDive.MainApp
             page.InitProtocolResponse(e);
             Window.Current.Content = page;
             Window.Current.Activate();
+            return true;
+        }
 
+        private bool HandleProtocolActivation(IActivatedEventArgs args)
+        {
+            var e = args as ProtocolActivatedEventArgs;
+            if (e == null) return false;
+
+            var uiElement = new TextBlock { Text = "protocol activated", FontSize = 42 };
+            Window.Current.Content = uiElement;
+            Window.Current.Activate();
+            return true;
         }
 
         private async Task RefreshBackgroundTasks()
@@ -351,7 +367,7 @@ namespace UwpDeepDive.MainApp
             if (AskForExtendedExecutionOnNextSuspend)
             {
                 AskForExtendedExecutionOnNextSuspend = false;
-                using (var session = new ExtendedExecutionSession() {Reason = ExtendedExecutionReason.SavingData})
+                using (var session = new ExtendedExecutionSession() { Reason = ExtendedExecutionReason.SavingData })
                 {
                     session.Revoked += (s, args) => { AppLog.Write("extended execution revoked, reason: " + args.Reason); };
                     session.Description = "toasting things up";

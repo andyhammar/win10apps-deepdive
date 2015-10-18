@@ -87,7 +87,7 @@ namespace UwpDeepDive.Bg
 
             var note = ApplicationData.Current.LocalSettings.Values["note"] as string;
 
-            var newNote = $"{note}{Environment.NewLine}[toast reply]{reply}";
+            var newNote = $"{note}{Environment.NewLine}[toast reply] {reply}";
 
             ApplicationData.Current.LocalSettings.Values["note"] = newNote;
         }

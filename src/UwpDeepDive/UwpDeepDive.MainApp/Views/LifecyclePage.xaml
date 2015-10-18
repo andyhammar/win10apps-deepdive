@@ -14,7 +14,8 @@
                     RelativePanel.Below="{Binding ElementName=_header}"
                     Margin="10">
             <StackPanel  Orientation="Horizontal">
-                <TextBox Header="text (read only)" Text="{Binding UserText}" IsReadOnly="true" Height="150" AcceptsReturn="True"/>
+                <TextBox Header="text (read only)" Text="{Binding UserText}" 
+                         IsReadOnly="true" Foreground="DarkGray" Height="150" AcceptsReturn="True"/>
                 <StackPanel VerticalAlignment="Bottom" >
                     <StackPanel.Resources>
                         <ResourceDictionary>
