@@ -15,7 +15,7 @@
                     Margin="10">
             <StackPanel  Orientation="Horizontal">
                 <TextBox Header="text (read only)" Text="{Binding UserText}" 
-                         IsReadOnly="true" Foreground="DarkGray" Height="150" AcceptsReturn="True"/>
+                         IsReadOnly="true" Foreground="DarkGray" Height="150" AcceptsReturn="True" MinWidth="300"/>
                 <StackPanel VerticalAlignment="Bottom" >
                     <StackPanel.Resources>
                         <ResourceDictionary>
