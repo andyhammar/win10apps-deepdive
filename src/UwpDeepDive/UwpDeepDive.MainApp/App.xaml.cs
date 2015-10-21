@@ -309,12 +309,10 @@ namespace UwpDeepDive.MainApp
         private void App_BackRequested(object sender, BackRequestedEventArgs e)
         {
             var frame = Window.Current.Content as Frame;
-            if (frame == null) return;
-            if (frame.CanGoBack)
-            {
-                frame.GoBack();
-                e.Handled = true;
-            }
+            if (frame == null || !frame.CanGoBack) return;
+
+            e.Handled = true;
+            frame.GoBack();
         }
 
 

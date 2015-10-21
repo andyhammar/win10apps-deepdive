@@ -8,7 +8,7 @@ namespace UwpDeepDive.MainApp.ViewModels
 
         public LifecyclePageVm()
         {
-            _userText = "placeholder\\r\\ntext";
+            _userText = "placeholder text";
         }
 
         public void InitUserTextFromPersistentStorage()

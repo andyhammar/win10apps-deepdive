@@ -62,7 +62,8 @@ namespace UwpDeepDive.Bg
 
         private static bool CheckBackgroundWorkCost()
         {
-            if (BackgroundWorkCost.CurrentBackgroundWorkCost == BackgroundWorkCostValue.High)
+            if (BackgroundWorkCost.CurrentBackgroundWorkCost 
+                == BackgroundWorkCostValue.High)
             {
                 //being a good citizen
                 return true;
@@ -72,13 +73,12 @@ namespace UwpDeepDive.Bg
 
         private bool HandleToastResponse(IBackgroundTaskInstance taskInstance)
         {
-            var toastNotificationResponse = taskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
-            if (toastNotificationResponse != null)
-            {
-                SaveToastResponse(toastNotificationResponse);
-                return true;
-            }
-            return false;
+            var toastNotificationResponse = taskInstance.TriggerDetails
+                as ToastNotificationActionTriggerDetail;
+            if (toastNotificationResponse == null) return false;
+
+            SaveToastResponse(toastNotificationResponse);
+            return true;
         }
 
         private void SaveToastResponse(ToastNotificationActionTriggerDetail toastNotificationResponse)
