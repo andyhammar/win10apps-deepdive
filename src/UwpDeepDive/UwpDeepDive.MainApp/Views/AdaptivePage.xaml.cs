@@ -16,7 +16,8 @@ namespace UwpDeepDive.MainApp.Views
         public AdaptivePage()
         {
             this.InitializeComponent();
-            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(400, 400));
+            Windows.UI.ViewManagement.ApplicationView.
+                GetForCurrentView().SetPreferredMinSize(new Size(400, 400));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

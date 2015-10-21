@@ -16,7 +16,7 @@
                         <Setter Target="stackPanel.(RelativePanel.AlignRightWithPanel)" Value="False"/>
                         <Setter Target="image.(FrameworkElement.Margin)">
                             <Setter.Value>
-                                <Thickness>20,0,0,0</Thickness>
+                                <Thickness>40,40,40,40</Thickness>
                             </Setter.Value>
                         </Setter>
                     </VisualState.Setters>
