@@ -30,6 +30,11 @@ namespace UwpDeepDive.MainApp.Views
 
         private void button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            //this would avoid the non-realized error from DeferLoadStrategy=Lazy
+            //if (_lazyImage == null)
+            //{
+            //    var obj = FindName("_lazyImage");
+            //}
             _lazyImage.Source =
                 new BitmapImage(
                     new Uri(
