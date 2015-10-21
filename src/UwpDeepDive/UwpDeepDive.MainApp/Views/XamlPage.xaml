@@ -7,7 +7,7 @@
     xmlns:viewModels="using:UwpDeepDive.MainApp.ViewModels"
     x:Class="UwpDeepDive.MainApp.Views.XamlPage"
     mc:Ignorable="d" 
-    d:DataContext="{d:DesignInstance viewModels:XamlPageVm, d:IsDesignTimeCreatable=True}">
+    d:DataContext="{d:DesignInstance viewModels:XamlPageVm, IsDesignTimeCreatable=True}">
     <local:PageBase.Resources>
 
         <DataTemplate x:Key="DataTemplate_Binding">
