@@ -21,6 +21,8 @@ namespace UwpDeepDive.MainApp.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            AppLog.Write();
+
             base.OnNavigatedTo(e);
 
             HandleObjectParameter(e);

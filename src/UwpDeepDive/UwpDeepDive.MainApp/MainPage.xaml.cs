@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Core;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+using UwpDeepDive.MainApp.Helpers;
 using UwpDeepDive.MainApp.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -12,6 +15,8 @@ namespace UwpDeepDive.MainApp
     {
         public MainPage()
         {
+            AppLog.Write();
+
             this.InitializeComponent();
             DataContext = new MainPageVm();
         }
@@ -22,6 +27,15 @@ namespace UwpDeepDive.MainApp
             if (page == null) return;
 
             Frame.Navigate(page.Type, page.Param);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            AppLog.Write();
+            base.OnNavigatedTo(e);
+
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                AppViewBackButtonVisibility.Collapsed;
         }
     }
 }

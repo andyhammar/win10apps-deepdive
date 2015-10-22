@@ -41,6 +41,7 @@ namespace UwpDeepDive.MainApp
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            AppLog.Write();
         }
 
         public static bool AskForExtendedExecutionOnNextSuspend { get; set; }
