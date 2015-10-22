@@ -21,7 +21,7 @@
                         </Setter>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="600"/>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
                     </VisualState.StateTriggers>
                 </VisualState>
                 <VisualState x:Name="WideState">
@@ -34,14 +34,14 @@
                         </Setter>
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="500"/>
+                        <AdaptiveTrigger MinWindowWidth="520"/>
                     </VisualState.StateTriggers>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <StackPanel x:Name="stackPanel" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
             <TextBlock Text="Adaptive code" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-            <TextBlock Margin="8" x:Name="_adaptiveCodeStatusTextBlock"/>
+            <TextBlock Margin="8" x:Name="_adaptiveCodeStatusTextBlock" TextWrapping="Wrap"/>
             <TextBlock Text="Device family" Style="{StaticResource AppHeaderTextBlockStyle}"/>
             <local:DeviceSpecificUc Margin="8" Height="100"/>
         </StackPanel>

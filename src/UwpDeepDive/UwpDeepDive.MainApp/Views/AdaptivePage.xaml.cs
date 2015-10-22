@@ -35,7 +35,7 @@ namespace UwpDeepDive.MainApp.Views
 
         private void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)
         {
-            _adaptiveCodeStatusTextBlock.Text = "camera button pressed!";
+            _adaptiveCodeStatusTextBlock.Text = "CAM CAM CAM CAM CAM CAM CAM CAM CAM CAM CAM CAM CAM CAM!";
         }
     }
 }
