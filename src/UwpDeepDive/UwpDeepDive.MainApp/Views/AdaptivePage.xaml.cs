@@ -3,7 +3,9 @@
 using Windows.Foundation;
 using Windows.Foundation.Metadata;
 using Windows.Phone.UI.Input;
+using Windows.System.Profile;
 using Windows.UI.Xaml.Navigation;
+using UwpDeepDive.MainApp.Helpers;
 using static Windows.Phone.UI.Input.HardwareButtons;
 
 namespace UwpDeepDive.MainApp.Views
@@ -31,6 +33,8 @@ namespace UwpDeepDive.MainApp.Views
                 status = "phone API found!";
             }
             _adaptiveCodeStatusTextBlock.Text = status;
+
+            _adaptiveCodeDeviceFamily.Text = AnalyticsInfo.VersionInfo.DeviceFamily;
         }
 
         private void HardwareButtons_CameraPressed(object sender, CameraEventArgs e)

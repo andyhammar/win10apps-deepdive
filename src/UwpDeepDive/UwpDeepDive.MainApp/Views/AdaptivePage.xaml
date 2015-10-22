@@ -45,7 +45,10 @@
                     RelativePanel.AlignLeftWithPanel="True" 
                     RelativePanel.AlignRightWithPanel="True">
             <TextBlock Text="Adaptive code" Style="{StaticResource AppHeaderTextBlockStyle}"/>
-            <TextBlock Margin="8" x:Name="_adaptiveCodeStatusTextBlock" TextWrapping="Wrap"/>
+            <TextBlock Margin="8" TextWrapping="Wrap" Text="Has camera API?" FontWeight="Bold"/>
+            <TextBlock Margin="8" x:Name="_adaptiveCodeStatusTextBlock" TextWrapping="Wrap" Text="has camera API?"/>
+            <TextBlock Margin="8" TextWrapping="Wrap" Text="Device family" FontWeight="Bold"/>
+            <TextBlock Margin="8" x:Name="_adaptiveCodeDeviceFamily" />
             <TextBlock Text="Device family" Style="{StaticResource AppHeaderTextBlockStyle}"/>
             <local:DeviceSpecificUc Margin="8" Height="100"/>
         </StackPanel>
