@@ -366,10 +366,17 @@ namespace UwpDeepDive.MainApp
             if (AskForExtendedExecutionOnNextSuspend)
             {
                 AskForExtendedExecutionOnNextSuspend = false;
-                using (var session = new ExtendedExecutionSession() { Reason = ExtendedExecutionReason.SavingData })
+                using (var session = new ExtendedExecutionSession()
                 {
-                    session.Revoked += (s, args) => { AppLog.Write("extended execution revoked, reason: " + args.Reason); };
+                    Reason = ExtendedExecutionReason.SavingData
+                })
+                {
+                    session.Revoked += (s, args) =>
+                    {
+                        AppLog.Write("extended execution revoked, reason: " + args.Reason);
+                    };
                     session.Description = "toasting things up";
+
                     var extendedExecutionResult = await session.RequestExtensionAsync();
                     if (extendedExecutionResult == ExtendedExecutionResult.Allowed)
                     {
@@ -385,34 +392,20 @@ namespace UwpDeepDive.MainApp
 
         private void ShowStillAliveToast()
         {
-            ToastContent content = new ToastContent()
+            var content = new ToastContent
             {
                 Launch = "toastResponse",
-
-                Visual = new ToastVisual()
+                Visual = new ToastVisual
                 {
-                    TitleText = new ToastText
-                    {
-                        Text = "Still alive!"
-                    },
-
-                    BodyTextLine1 = new ToastText
-                    {
-                        Text = DateTime.Now.ToString("G")
-                    },
+                    TitleText = new ToastText{Text = "Still alive!"},
+                    BodyTextLine1 = new ToastText{Text = DateTime.Now.ToString("G")},
                 },
-
                 Actions = new ToastActionsSnoozeAndDismiss()
             };
-
             var doc = content.GetXml();
-
-            // Generate WinRT notification
             var toast = new ToastNotification(doc);
-
             var notifier = ToastNotificationManager.CreateToastNotifier();
             notifier.Show(toast);
-
         }
     }
 }

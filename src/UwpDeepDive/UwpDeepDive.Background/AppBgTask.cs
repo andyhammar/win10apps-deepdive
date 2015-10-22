@@ -95,6 +95,7 @@ namespace UwpDeepDive.Bg
 
         private void SendToast(string text = null)
         {
+            //This is using NotificationsExtensions
             var content = new ToastContent()
             {
                 Launch = "toastResponse",

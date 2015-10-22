@@ -25,13 +25,13 @@
                         </ResourceDictionary>
                     </StackPanel.Resources>
                     <Button 
+                		Content="Edit"
+                		Click="nextButton_OnClick"
+                		Tag="loadnote"/>
+                    <Button 
                 		Content="Edit (send vm)"                
                 		Click="nextButton_OnClick"
                 		Tag="{Binding}"/>
-                    <Button 
-                		Content="Edit (load again)"
-                		Click="nextButton_OnClick"
-                		Tag="loadnote"/>
 
                 </StackPanel>
             </StackPanel>
