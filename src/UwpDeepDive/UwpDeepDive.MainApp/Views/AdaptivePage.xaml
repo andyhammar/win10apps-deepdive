@@ -13,7 +13,8 @@
                 <VisualState x:Name="NarrowState"/>
                 <VisualState x:Name="UltraWideState">
                     <VisualState.Setters>
-                        <Setter Target="stackPanel.(RelativePanel.AlignRightWithPanel)" Value="False"/>
+                        <Setter Target="stackPanel.(RelativePanel.AlignRightWithPanel)" 
+                                Value="False"/>
                         <Setter Target="image.(FrameworkElement.Margin)">
                             <Setter.Value>
                                 <Thickness>40,40,40,40</Thickness>
@@ -26,7 +27,8 @@
                 </VisualState>
                 <VisualState x:Name="WideState">
                     <VisualState.Setters>
-                        <Setter Target="stackPanel.(RelativePanel.AlignRightWithPanel)" Value="False"/>
+                        <Setter Target="stackPanel.(RelativePanel.AlignRightWithPanel)" 
+                                Value="False"/>
                         <Setter Target="image.(FrameworkElement.Margin)">
                             <Setter.Value>
                                 <Thickness>10,0,0,0</Thickness>
